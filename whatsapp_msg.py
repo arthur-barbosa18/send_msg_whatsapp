@@ -2,14 +2,14 @@ from selenium import webdriver
 import time
 
 
-TIME_SLEEP = 5
+TIME_SLEEP = 3.4
 
 class 	WhatasapMsg():
 	""" Responsible by send whatsapp messages  
 	"""
 	def __init__(self):
 		self.mensagem = "."
-		self.grupos = ['Fica frio aí',"Victor Aluno"]
+		self.grupos = ['Rappi']
 		options = webdriver.ChromeOptions()
 		options.add_argument("Lang=pt-br")
 		self.driver = webdriver.Chrome(executable_path=r'./chromedriver')
@@ -22,6 +22,17 @@ class 	WhatasapMsg():
 		time.sleep(30)
 		for grupo in self.grupos:
 			
+
+			chat_box1 =  self.driver.find_element_by_class_name('_2FVVk')
+			#print(chat_box1)
+			time.sleep(TIME_SLEEP)
+			chat_box1.click()
+			time.sleep(TIME_SLEEP)
+
+			chat_box1.send_keys(grupo)
+			time.sleep(TIME_SLEEP)
+			
+
 			user = self.driver.find_element_by_xpath("//span[@title='{0}']".format(grupo))	
 			user.click()
 
@@ -40,4 +51,5 @@ class 	WhatasapMsg():
 
 whats_obj = WhatasapMsg()
 whats_obj.enviar_mensagem()
+
 
